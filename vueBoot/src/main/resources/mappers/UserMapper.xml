@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+ "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :映射的接口的全名 -->
+<mapper namespace="cn.com.vueboot.system.dao.UserMapper">
+    <sql id="attwhere">
+        1=1
+        <if test="id!= null and id!= ''">
+            and u.id=#{id}
+        </if>
+        <if test="username!= null and username!= ''">
+            and u.username=#{username}
+        </if>
+        <if test="password!= null and password!= ''">
+            and u.password=#{password}
+        </if>
+        <if test="age!=null and age!= ''">
+            and u.age=#{age}
+        </if>
+        <if test="email!= null and email!= ''">
+            and u.email=#{email}
+        </if>
+
+
+    </sql>
+	<select id="findUser" resultType="cn.com.vueboot.system.emtity.User">
+        select
+         *
+        from sys_user u
+        <where>
+            <include refid="attwhere"/>
+        </where>
+    </select>
+</mapper>
