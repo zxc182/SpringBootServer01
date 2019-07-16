@@ -1,0 +1,53 @@
+
+server: #当前服务器的端口号
+  port: 8082
+  servlet: #当前web应用的名称
+    context-path: /vueboot
+
+
+#普通数据的配置
+#name: lisi
+#对象的配置
+person:
+  name: lisi
+  age: 45
+  birthday: 1997-8-4
+  addr: yunnan
+#行内对象配置
+#person: {name: lisi,age: 23,addr: yunnan}
+#配置数组、集合(普通字符串)
+#  city:
+#    - beijin
+#    - tianjin
+#    - yunnan
+#    - shanghai
+#city2: [beijing,tianjin,chongqing,shanghai]
+#配置数据、集合（对象数据）
+#student:
+#  - name: tom
+#    age: 20
+#    addr: yunnan
+#  - name: lucy
+#    age: 10
+#    addr: shanghai
+#
+#student2: [{name: tom,age: 20}]
+#Map配置
+#map:
+#  key1: value1
+#  key2: value2
+#
+
+
+#MyBatis
+mybatis:
+  check-config-location: true
+  mapper-locations: classpath:mappers/*.xml
+
+# spring datasource 数据源
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vueboot?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
