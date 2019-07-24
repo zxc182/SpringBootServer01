@@ -20,4 +20,12 @@
          *
         from user
     </select>
+
+    <select id="findByUsername" resultMap="userResultMap" parameterType="java.lang.String">
+        select
+         *
+        from user u
+        where
+         u.username=#{username}
+    </select>
 </mapper>

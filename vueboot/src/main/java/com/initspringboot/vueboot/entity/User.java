@@ -1,19 +1,16 @@
 package com.initspringboot.vueboot.entity;
 
-import java.io.Serializable;
+import org.apache.catalina.Role;
 
+import java.util.List;
 
-public class User implements Serializable {
-
-    private static final long serialVersionUID = 3862416351900991824L;
-
-    private String key ;
+public class User {
 
     private String uId;
     private String username;
     private String password;
     private String age;
-
+    private List<String> roles;
 
     public String getuId() {
         return uId;
@@ -47,13 +44,11 @@ public class User implements Serializable {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "uId='" + uId + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", age='" + age + '\'' +
-                '}';
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }
