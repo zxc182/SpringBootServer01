@@ -17,7 +17,7 @@ public class UserMapperTest {
     private UserMapper userMapper;
     @Test
     public void contextLoads() {
-        List<User> users = userMapper.selectAll();
-        System.err.println(users);
+        //List<User> users = userMapper.selectAll();
+        //System.err.println(users);
     }
 }

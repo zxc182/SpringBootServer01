@@ -1,16 +1,23 @@
 package com.initspringboot.vueboot.entity;
 
-import org.apache.catalina.Role;
+import com.initspringboot.vueboot.util.UUIdGenId;
+import org.springframework.data.annotation.Id;
+import tk.mybatis.mapper.annotation.KeySql;
 
-import java.util.List;
+import javax.persistence.*;
 
+@Table
 public class User {
 
+    @Id
+    @KeySql(genId = UUIdGenId.class) //生成uuid
+    @GeneratedValue(strategy = GenerationType.AUTO,generator = "select uuid") //auto 让程序生成 获取主键
     private String uId;
     private String username;
     private String password;
+    @Transient
     private String age;
-    private List<String> roles;
+    private String role;
 
     public String getuId() {
         return uId;
@@ -44,11 +51,22 @@ public class User {
         this.age = age;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uId='" + uId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age='" + age + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

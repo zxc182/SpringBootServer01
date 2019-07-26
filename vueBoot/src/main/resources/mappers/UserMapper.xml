@@ -3,29 +3,98 @@
         "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.initspringboot.vueboot.dao.UserMapper">
+
     <!--
  			resultMap:将实体类字段属性名和表的字段名进行对应
  		-->
-    <resultMap id="userResultMap" type="com.initspringboot.vueboot.entity.User" >
-        <!-- 用id属性映射主键字段 -->
-        <id property="uId" column="u_id" />
-        <!-- 用result属性来映射非主键字段 -->
+    <!--<resultMap id="userResultMap" type="com.initspringboot.vueboot.entity.User" >
+        &lt;!&ndash; 用id属性映射主键字段 &ndash;&gt;
+        <id property="id" column="id" />
+        &lt;!&ndash; 用result属性来映射非主键字段 &ndash;&gt;
         <result property="username" column="username"/>
         <result property="password" column="password" />
-        <result property="age" column="age"/>
-    </resultMap>
+        <result property="role" column="role"/>
 
-    <select id="selectAll" resultMap="userResultMap">
+    </resultMap>-->
+
+    <sql id="field">
+        t.u_id,
+        t.username,
+        t.password,
+        t.role
+    </sql>
+    <sql id="selectWhere">
+        1=1
+        <if test="uId != null and uId != ''">
+            and t.u_id = #{uId}
+        </if>
+        <if test="password != null and password != ''">
+            and t.password = #{password}
+        </if>
+        <if test="username != null and username != ''">
+            and t.username like concat('%',#{username},'%')
+        </if>
+        <if test="role != null and role != ''">
+            and t.role = #{role}
+        </if>
+    </sql>
+    <sql id="updateField">
+        <if test="uId != null and uId != ''">
+            t.u_id = #{uId}
+        </if>
+        <if test="password != null and password != ''">
+            t.password = #{password}
+        </if>
+        <if test="username != null and username != ''">
+            t.username = #{username}
+        </if>
+        <if test="role != null and role != ''">
+            t.role = #{role}
+        </if>
+    </sql>
+    <sql id="field2">
+        u_id,username,password,role
+    </sql>
+    <!--<insert id="insert" parameterType="java.util.HashMap" >
+        insert into
+        user(
+         <include refid="field2"></include>
+        ) values (
+         #{uId},#{username},#{password},#{role}
+        )
+    </insert>-->
+
+    <!--<select id="selectAll"  resultType="User">
         select
-         *
-        from user
+         <include refid="field"></include>
+        from user t
+        <where>
+            <include refid="selectWhere"></include>
+        </where>
+    </select>-->
+
+    <update id="updateUser">
+        update use t
+        <set>
+            <include refid="updateField"></include>
+        </set>
+    </update>
+
+    <delete id="deleteUser">
+        delete from
+        user
+        <where>
+            <include refid="selectWhere"></include>
+        </where>
+    </delete>
+
+    <select id="PageList" resultType="User">
+        select
+         <include refid="field"></include>
+        from user t
+        <where>
+            <include refid="selectWhere"></include>
+        </where>
     </select>
 
-    <select id="findByUsername" resultMap="userResultMap" parameterType="java.lang.String">
-        select
-         *
-        from user u
-        where
-         u.username=#{username}
-    </select>
 </mapper>

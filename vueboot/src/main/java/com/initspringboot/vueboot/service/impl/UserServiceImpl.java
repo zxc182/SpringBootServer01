@@ -1,96 +1,60 @@
 package com.initspringboot.vueboot.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.initspringboot.vueboot.dao.UserMapper;
-import com.initspringboot.vueboot.entity.JwtUser;
 import com.initspringboot.vueboot.entity.User;
 import com.initspringboot.vueboot.service.IUserService;
-import com.initspringboot.vueboot.util.JwtTokenUtil;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements IUserService , UserDetailsService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService  {
     @Autowired
     private UserMapper userMapper;
 
-    private AuthenticationManager authenticationManager;
-    private UserDetailsService userDetailsService;
-    private JwtTokenUtil jwtTokenUtil;
 
-    @Override
-    public List<User> findAll() {
-        List<User> users = userMapper.selectAll();
-        return users;
+    /*@Override
+    public List<User> pageList(User user,int pageNum, int pageSize) {
+        *//*String sql = "select * from user where u_id = #{uId} or u_id = #{uId2}";
+        Map map = new LinkedHashMap();
+        map.put("sql",sql);
+        map.put("uId",1);
+        map.put("uId2",2);*//*
+        //List<User> users = userMapper.selectAll();
+        //List<User> users =userMapper.selectByRowBounds(user,new RowBounds(1,3));
+        //PageHelper.startPage(pageNum,pageSize);//pageNum<=0 会查询第一页，如果 pageNum>总页数 会查询最后一页。
+        //Page<User> userList = (Page<User>) userMapper.PageList(user);
+        //userList.getTotal();//总页数
+        //userList.size(); //条数
+
+        *//*Example example = new Example(User.class);
+        Example.Criteria c = example.createCriteria();
+        c.andLike("username","%"+ user.getUsername() +"%");
+        //userMapper.selectByExample(example);
+        return userMapper.selectByExample(example);*//*
+        List<User> data = queryAll();
+        return data;
+
     }
 
     @Override
-    public User findByUsername(String username) {
+    public void add(User user) {
+       *//* String sql = "insert into user values(#{user.uId},#{user.username},#{user.password},#{user.role})";
+        Map map = new LinkedHashMap();
+        map.put("sql",sql);
+        map.put("user",user);*//*
+        int rows = userMapper.insert(user);
 
-        return null;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userMapper.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("用户不存在");
-        } else {
-            return new JwtUser(user.getUsername(), user.getPassword(), user.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+        System.err.println(rows+","+user.getuId());
+        if(rows == 1){
+            throw new RuntimeException("新增成功");
         }
-        //return null;
-    }
 
 
-    public UserServiceImpl(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, JwtTokenUtil jwtTokenUtil) {
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
-        this.jwtTokenUtil = jwtTokenUtil;
-    }
-
-    @Override
-    public String login(String username, String password) {
-        UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
-        Authentication authentication = authenticationManager.authenticate(upToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return jwtTokenUtil.generateToken(userDetails);
-    }
-
-    @Override
-    public String register(User user) {
-        String username = user.getUsername();
-        if (userMapper.findByUsername(username) != null) {
-            return "用户已存在";
-        }
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String rawPassword = user.getPassword();
-        user.setPassword(encoder.encode(rawPassword));
-        List<String> roles = new ArrayList<>();
-        roles.add("ROLE_USER");
-        user.setRoles(roles);
-        userMapper.insert(user);
-        return "success";
-    }
-
-    @Override
-    public String refreshToken(String oldToken) {
-        String token = oldToken.substring("Bearer ".length());
-        if (!jwtTokenUtil.isTokenExpired(token)) {
-            return jwtTokenUtil.refreshToken(token);
-        }
-        return "error";
-    }
+    }*/
 }

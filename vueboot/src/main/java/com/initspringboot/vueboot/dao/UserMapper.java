@@ -1,27 +1,19 @@
 package com.initspringboot.vueboot.dao;
 
+import com.github.pagehelper.Page;
 import com.initspringboot.vueboot.entity.User;
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
-@Mapper
-public interface UserMapper{
 
-    List<User> selectAll();
+public interface UserMapper extends Mapper<User> {
 
-    /**
-     * 通过用户名查找用户
-     *
-     * @param username 用户名
-     * @return 用户信息
-     */
-    User findByUsername(String username);
+    /*List<User> selectAll(User user);
 
-    /**
-     * 插入
-     * @param user
-     * @return
-     */
-    int insert(User user);
+    int insert(User user);*/
+
+    //List<User> PageList(User user);
 }
