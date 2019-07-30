@@ -16,4 +16,6 @@ public interface UserMapper extends Mapper<User> {
     int insert(User user);*/
 
     //List<User> PageList(User user);
+
+    int  updateUser(User user);
 }

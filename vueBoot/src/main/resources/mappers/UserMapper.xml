@@ -40,13 +40,13 @@
     </sql>
     <sql id="updateField">
         <if test="uId != null and uId != ''">
-            t.u_id = #{uId}
+            t.u_id = #{uId},
         </if>
         <if test="password != null and password != ''">
-            t.password = #{password}
+            t.password = #{password},
         </if>
         <if test="username != null and username != ''">
-            t.username = #{username}
+            t.username = #{username},
         </if>
         <if test="role != null and role != ''">
             t.role = #{role}
@@ -74,10 +74,12 @@
     </select>-->
 
     <update id="updateUser">
-        update use t
+        update user t
         <set>
             <include refid="updateField"></include>
         </set>
+        where
+         t.u_id = #{uId}
     </update>
 
     <delete id="deleteUser">

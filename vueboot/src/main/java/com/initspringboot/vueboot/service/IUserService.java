@@ -12,5 +12,6 @@ public interface IUserService extends IBaseService<User> {
     //List<User> pageList(User user,int pageNum, int pageSize);
 
     //void add(User user);
+    void updateUser(User user);
 
 }

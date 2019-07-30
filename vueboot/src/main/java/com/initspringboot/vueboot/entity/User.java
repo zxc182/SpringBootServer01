@@ -1,23 +1,28 @@
 package com.initspringboot.vueboot.entity;
 
 import com.initspringboot.vueboot.util.UUIdGenId;
-import org.springframework.data.annotation.Id;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
+@Entity
+@Table(name = "user")
+public class User implements Serializable{
 
-@Table
-public class User {
-
+    private static final long serialVersionUID = 1L;
     @Id
     @KeySql(genId = UUIdGenId.class) //生成uuid
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "select uuid") //auto 让程序生成 获取主键
+    @Column(name = "u_id")
     private String uId;
     private String username;
     private String password;
     @Transient
     private String age;
     private String role;
+    private String salt;
+    
 
     public String getuId() {
         return uId;
@@ -59,14 +64,21 @@ public class User {
         this.role = role;
     }
 
+   
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "uId='" + uId + '\'' +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", age='" + age + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+        return "User [age=" + age + ", password=" + password + ", role=" + role + ", salt=" + salt + ", uId=" + uId
+                + ", username=" + username + "]";
     }
+
+    
 }

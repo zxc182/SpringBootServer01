@@ -29,8 +29,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
         //List<User> users =userMapper.selectByRowBounds(user,new RowBounds(1,3));
         //PageHelper.startPage(pageNum,pageSize);//pageNum<=0 会查询第一页，如果 pageNum>总页数 会查询最后一页。
         //Page<User> userList = (Page<User>) userMapper.PageList(user);
-        //userList.getTotal();//总页数
-        //userList.size(); //条数
+        //userList.getTotal();//总条数
+        //userList.size(); //每页的条数
 
         *//*Example example = new Example(User.class);
         Example.Criteria c = example.createCriteria();
@@ -57,4 +57,8 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements IUserServi
 
 
     }*/
+
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
 }

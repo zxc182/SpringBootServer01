@@ -18,7 +18,7 @@ public  class BaseServiceImpl<T> implements IBaseService<T> {
 
     // 注入mapper
     @Autowired
-    private Mapper<T> mapper;
+    public Mapper<T> mapper;
 
     // 缓存子类泛型类型
     private Class<T> cache=null;

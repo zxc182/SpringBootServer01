@@ -19,8 +19,8 @@ public class VuebootApplicationTests {
 
     @Test
     public void contextLoads() {
-        /*List<User> users = userMapper.selectAll();
-        System.err.println(users);*/
+        List<User> users = userMapper.selectAll();
+        System.err.println(users);
     }
 
 }
