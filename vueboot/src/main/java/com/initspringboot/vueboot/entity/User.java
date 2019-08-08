@@ -1,5 +1,6 @@
 package com.initspringboot.vueboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.initspringboot.vueboot.util.UUIdGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -8,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 @Entity
 @Table(name = "user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +24,22 @@ public class User implements Serializable{
     private String age;
     private String role;
     private String salt;
+
+
+    public User(){
+
+    }
+
+    public User(String uId, String username, String password, String age, String role, String salt) {
+        this.uId = uId;
+        this.username = username;
+        this.password = password;
+        this.age = age;
+        this.role = role;
+        this.salt = salt;
+    }
+
+    
     
 
     public String getuId() {
@@ -79,6 +97,8 @@ public class User implements Serializable{
         return "User [age=" + age + ", password=" + password + ", role=" + role + ", salt=" + salt + ", uId=" + uId
                 + ", username=" + username + "]";
     }
+
+    
 
     
 }

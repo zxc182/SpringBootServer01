@@ -8,7 +8,7 @@
 #  birthday: 1997-8-4
 #  addr: yunnan
 #行内对象配置
-#person: {name: lisi,age: 23,addr: yunnan}
+person: {name: lisi,age: 23,addr: yunnan}
 #配置数组、集合(普通字符串)
 #  city:
 #    - beijin

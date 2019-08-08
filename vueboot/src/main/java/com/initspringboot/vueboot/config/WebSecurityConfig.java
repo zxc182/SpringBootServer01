@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable() // 关闭防跨域攻击功能
                 .authorizeRequests()
-                .antMatchers("/users/signup","/login").permitAll()// 指定用户可以访问的url模式
+                .antMatchers("/users/signup","/login","/quick2").permitAll()// 指定用户可以访问的url模式
                 .antMatchers("/v2/api-docs",//swagger api json
                 "/swagger-resources/configuration/ui",//用来获取支持的动作
                 "/swagger-resources",//用来获取api-docs的URL
@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
 
                 //.and().logout()// 提供注销支持，使用WebSecurityConfigurerAdapter会自动被应用。
                 //.logoutUrl("/my/logout")// 设置触发注销操作的URL (默认是/logout). 如果CSRF内启用（默认是启用的）的话这个请求的方式被限定为POST
@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // .deleteCookies(cookieNamesToClear)//允许指定在注销成功时将移除的cookie
                 // 为了定制注销功能，你可以添加 LogoutHandler和LogoutSuccessHandler的实现
 
-                .formLogin();
+                //.formLogin();
                 // .loginPage("/login")/*指定登录页的路径*/
                 //.successHandler(authenticationSuccessHandler) // 登录成功处理
                 //.failureHandler(authenticationFailureHandler) // 登录失败处理

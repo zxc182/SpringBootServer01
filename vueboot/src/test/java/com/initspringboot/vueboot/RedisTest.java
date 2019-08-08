@@ -25,7 +25,7 @@ public class RedisTest {
     @Test
     public void test() throws JsonProcessingException {
         //从redis中获得数据， 数据的形式json字符串
-        /*String userListJson = redisTemplate.boundValueOps("user.findAll").get();
+        String userListJson = redisTemplate.boundValueOps("user.findAll").get();
         //判断redis是否存在数据
         if(null == userListJson){
             //不存在，从数据库查询
@@ -43,6 +43,6 @@ public class RedisTest {
             System.err.println("从redis缓存中获得数据");
         }
         //打印
-        System.err.println(userListJson);*/
+        System.err.println(userListJson);
     }
 }
