@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vueboot.system.mapper.SysUserMapper">
+ 
+    <resultMap id="BaseResultMap" type="com.vueboot.system.entity.SysUser">
+        <result column="sys_id"  property="sysId" />
+        <result column="sys_username"  property="sysUsername" />
+        <result column="sys_passWord"  property="sysPassword" />
+        <result column="sys_salt"  property="sysSalt" />
+        <result column="sys_avatar"  property="sysAvatar" />
+        <result column="sys_create_user"  property="sysCreateUser" />
+        <result column="sys_create_time"  property="sysCreateTime" />
+        <result column="sys_update_user"  property="sysUpdateUser" />
+        <result column="sys_update_time"  property="sysUpdateTime" />
+    </resultMap>
+ 
+    <select id="getAll" resultType="com.vueboot.system.entity.SysUser">
+        select * from sys_user
+    </select>
+ 
+</mapper>

@@ -7,15 +7,16 @@ import tk.mybatis.mapper.annotation.KeySql;
 import java.io.Serializable;
 
 import javax.persistence.*;
+
 @Entity
 @Table(name = "user")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class User implements Serializable{
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @KeySql(genId = UUIdGenId.class) //生成uuid
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "select uuid") //auto 让程序生成 获取主键
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "select uuid") //auto 让程序生成 获取主键
     @Column(name = "u_id")
     private String uId;
     private String username;
@@ -26,7 +27,7 @@ public class User implements Serializable{
     private String salt;
 
 
-    public User(){
+    public User() {
 
     }
 
@@ -39,8 +40,6 @@ public class User implements Serializable{
         this.salt = salt;
     }
 
-    
-    
 
     public String getuId() {
         return uId;
@@ -82,7 +81,6 @@ public class User implements Serializable{
         this.role = role;
     }
 
-   
 
     public String getSalt() {
         return salt;
@@ -98,7 +96,5 @@ public class User implements Serializable{
                 + ", username=" + username + "]";
     }
 
-    
 
-    
 }
