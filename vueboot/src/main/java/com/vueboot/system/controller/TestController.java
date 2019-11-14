@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
   * @RestController =  @Controller + @ResponseBody
  */
 @RestController
-@RequestMapping("/testBoot")
 public class TestController {
 	
 	

@@ -8,6 +8,8 @@ import com.vueboot.system.entity.SysUser;
 public interface SysUserMapper {
 	
 	SysUser getAll();
+
+	SysUser getByConditions(SysUser sysUser);
 	
 
 }

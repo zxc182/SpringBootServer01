@@ -15,7 +15,7 @@ class VuebootApplicationTests {
 
 	@Test
 	void contextLoads() {
-		SysUser su  = sysUserMapper.getAll();
+		SysUser su  = sysUserMapper.getByConditions(new SysUser("1122"));
 		System.out.println(su);
 	}
 

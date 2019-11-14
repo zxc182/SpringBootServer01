@@ -100,7 +100,11 @@ public class SysUser {
 				+ ", sysCreateTime=" + sysCreateTime + ", sysUpdateUser=" + sysUpdateUser + ", sysUpdateTime="
 				+ sysUpdateTime + "]";
 	}
-	
+
+	public SysUser(String sysUsername){
+		this.sysUsername = sysUsername;
+	}
+
 	public SysUser(String sysId, String sysUsername, String sysPassword, String sysSalt, String sysAvatar,
 			String sysCreateUser, Timestamp sysCreateTime, String sysUpdateUser, Timestamp sysUpdateTime) {
 		super();
